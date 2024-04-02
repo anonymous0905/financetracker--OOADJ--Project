@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Expense Receipt Management</title>
+</head>
+<body>
+<h1>Expense Receipt Management</h1>
+<form action="/expenses/add" method="post" enctype="multipart/form-data">
+  <label for="category">Category:</label>
+  <input type="text" id="category" name="category"><br>
+  <label for="amount">Amount:</label>
+  <input type="number" id="amount" name="amount" step="0.01"><br>
+  <label for="date">Date:</label>
+  <input type="date" id="date" name="date"><br>
+  <label for="receiptImage">Receipt Image:</label>
+  <input type="file" id="receiptImage" name="receiptImage"><br>
+  <input type="submit" value="Add Expense">
+</form>
+
+<div>
+  <h2>Expense List</h2>
+  <ul th:each="expense : ${expenses}">
+    <li th:text="'Category: ' + ${expense.category} + ', Amount: ' + ${expense.amount} + ', Date: ' + ${expense.date}">
+      <img th:if="${expense.receiptImage}" th:src="@{'/uploaded-images/' + ${expense.receiptImage}}" alt="Receipt Image" style="width: 100px; height: auto;">
+    </li>
+  </ul>
+</div>
+</body>
+</html>
