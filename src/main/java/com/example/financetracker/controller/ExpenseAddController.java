@@ -10,24 +10,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/expense")
+@RequestMapping("/expenseadd")
 public class ExpenseAddController {
-    private final ExpenseAddService expenseAddService;
+    private final ExpenseAddService expenseService;
 
     @Autowired
-    public ExpenseAddController(ExpenseAddService expenseAddService) {
-        this.expenseAddService = expenseAddService;
+    public ExpenseAddController(ExpenseAddService expenseService) {
+        this.expenseService = expenseService;
     }
 
     @GetMapping
-    public String showExpensPage(Model model) {
-        model.addAttribute("expenseadd", expenseAddService.findAllExpense());
-        return "expense";
+    public String showIncomePage(Model model) {
+        model.addAttribute("expenses", expenseService.findAllExpenses());
+        return "expenseadd";
     }
 
     @PostMapping("/add")
-    public String addExpense(ExpenseAdd expense) {
-        expenseAddService.addExpense(expense);
-        return "redirect:/expense";
+    public String addIncome(ExpenseAdd expense) {
+        expenseService.addExpense(expense);
+        return "redirect:/expenseadd";
     }
 }

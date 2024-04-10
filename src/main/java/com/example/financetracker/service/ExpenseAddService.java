@@ -1,7 +1,7 @@
 package com.example.financetracker.service;
 
 import com.example.financetracker.model.ExpenseAdd;
-import com.example.financetracker.repository.ExpnenseAddRepository;
+import com.example.financetracker.repository.ExpenseAddRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,18 +9,18 @@ import java.util.List;
 
 @Service
 public class ExpenseAddService {
-    private final ExpnenseAddRepository expenseaddRepository;
+    private final ExpenseAddRepository expenseRepository;
 
     @Autowired
-    public ExpenseAddService(ExpnenseAddRepository expenseaddRepository) {
-        this.expenseaddRepository = expenseaddRepository;
+    public ExpenseAddService(ExpenseAddRepository expenseRepository) {
+        this.expenseRepository = expenseRepository;
     }
 
-    public List<ExpenseAdd> findAllExpense() {
-        return expenseaddRepository.findAll();
+    public List<ExpenseAdd> findAllExpenses() {
+        return expenseRepository.findAll();
     }
 
     public ExpenseAdd addExpense(ExpenseAdd expense) {
-        return expenseaddRepository.save(expense);
+        return expenseRepository.save(expense);
     }
 }
