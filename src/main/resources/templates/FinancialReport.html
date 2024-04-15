@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Financial Reports</title>
+</head>
+<body>
+<h1>Financial Reports</h1>
+<div>
+    <h2>Financial Report List</h2>
+    <ul th:each="report : ${reports}">
+        <li>
+            <span th:text="'Title: ' + ${report.title}"></span>,
+            <span th:text="'Description: ' + ${report.description}"></span>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
