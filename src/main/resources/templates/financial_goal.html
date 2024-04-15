@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Financial Goals</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        
+        h1 {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+        
+        form {
+            display: inline-block;
+            text-align: left;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        label {
+            display: inline-block;
+            width: 120px;
+            text-align: right;
+            margin-right: 10px;
+            color: #333333;
+        }
+        
+        input {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .input-group {
+            margin-bottom: 10px;
+        }
+        
+        .btn-group {
+            margin-top: 10px;
+            margin-left: 135px;
+        }
+        
+        .btn-group button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-group button:hover {
+            background-color: #45a049;
+        }
+        
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 80%;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #dddddd;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+            color: #333333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Financial Goals</h1>
+
+    <form th:action="@{/financial_goal/add}" method="post" th:object="${financialGoal}">
+        <div class="input-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" th:field="*{name}" required>
+        </div>
+        
+        <div class="input-group">
+            <label for="targetAmount">Target Amount:</label>
+            <input type="number" id="targetAmount" name="targetAmount" th:field="*{targetAmount}" required>
+        </div>
+        
+        <div class="input-group">
+            <label for="deadline">Deadline:</label>
+            <input type="date" id="deadline" name="deadline" th:field="*{deadline}" required>
+        </div>
+        
+        <div class="btn-group">
+            <button type="submit">Add Goal</button>
+        </div>
+    </form>
+
+    <h2>Financial Goals List</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Target Amount</th>
+                <th>Deadline</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="goal : ${financialGoals}">
+                <td th:text="${goal.name}"></td>
+                <td th:text="${goal.targetAmount}"></td>
+                <td th:text="${#dates.format(goal.deadline, 'yyyy-MM-dd')}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
