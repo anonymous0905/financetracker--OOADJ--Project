@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Financial Reports</title>
+    <meta charset="UTF-8">
+    <title>Credit Score Monitoring</title>
 </head>
 <body>
-<h1>Financial Reports</h1>
+<h1>Credit Score Monitoring</h1>
 <div>
-    <h2>Financial Report List</h2>
-    <ul th:each="report : ${reports}">
-        <li>
-            <span th:text="'Title: ' + ${report.title}"></span>,
-            <span th:text="'Description: ' + ${report.description}"></span>
-        </li>
-    </ul>
+    <h2>Credit Score Details</h2>
+    <div th:if="${creditScore != null}">
+        <p>Your credit score is: <span th:text="${creditScore.score}"></span></p>
+    </div>
+    <div th:unless="${creditScore != null}">
+        <p>No credit score available</p>
+    </div>
 </div>
 </body>
 </html>
