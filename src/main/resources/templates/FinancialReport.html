@@ -3,32 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <title>Financial Reports</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+        }
+
+        h2 {
+            color: #0062cc;
+            margin-bottom: 10px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .alert {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-<h1>Financial Reports</h1>
-<div>
-    <h2>Financial Report Details</h2>
-    <div th:if="${report != null}">
-        <p>Total Expenses: <span th:text="${report.totalExpenses}"></span></p>
-        <p>Total Income: <span th:text="${report.totalIncome}"></span></p>
-        <p>Net Income: <span th:text="${report.netIncome}"></span></p>
-        <div th:if="${report.billsRemaining}">
-            <p>Bills are remaining</p>
+<div class="container">
+    <h1>Financial Reports</h1>
+    <div>
+        <h2>Financial Report Details</h2>
+        <div th:if="${report != null}" class="success">
+            <p>Total Expenses: <span th:text="${report.totalExpenses}"></span></p>
+            <p>Total Income: <span th:text="${report.totalIncome}"></span></p>
+            <p>Net Income: <span th:text="${report.netIncome}"></span></p>
+            <div th:if="${report.billsRemaining}" class="warning">
+                <p>Bills are remaining</p>
+            </div>
+            <div th:unless="${report.billsRemaining}" class="success">
+                <p>No bills are remaining</p>
+            </div>
+            <div th:if="${report.financialGoalsPresent}" class="success">
+                <p>Total Target Amount: <span th:text="${report.totalTargetAmount}"></span></p>
+                <p>Total Achieved Amount: <span th:text="${report.totalAchievedAmount}"></span></p>
+                <p>Goal Completion Percentage: <span th:text="${report.goalCompletionPercentage}"></span>%</p>
+            </div>
+            <div th:unless="${report.financialGoalsPresent}" class="warning">
+                <p>No financial goals are present</p>
+            </div>
         </div>
-        <div th:unless="${report.billsRemaining}">
-            <p>No bills are remaining</p>
+        <div th:unless="${report != null}" class="alert">
+            <p>No financial report available</p>
         </div>
-        <div th:if="${report.financialGoalsPresent}">
-            <p>Total Target Amount: <span th:text="${report.totalTargetAmount}"></span></p>
-            <p>Total Achieved Amount: <span th:text="${report.totalAchievedAmount}"></span></p>
-            <p>Goal Completion Percentage: <span th:text="${report.goalCompletionPercentage}"></span>%</p>
-        </div>
-        <div th:unless="${report.financialGoalsPresent}">
-            <p>No financial goals are present</p>
-        </div>
-    </div>
-    <div th:unless="${report != null}">
-        <p>No financial report available</p>
     </div>
 </div>
 </body>
