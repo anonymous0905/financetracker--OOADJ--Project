@@ -15,6 +15,10 @@ public class BillReminderController {
     @Autowired
     private BillReminderService billReminderService;
 
+    @GetMapping("/")
+    public String ind(){
+        return "index";
+    }
     @GetMapping("/billreminders")
     public String index(Model model) {
         List<BillReminder> reminders = billReminderService.getAllReminders();

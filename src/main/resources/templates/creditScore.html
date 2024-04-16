@@ -3,6 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Credit Score Monitoring</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        h1 {
+            color: #5a5a5a;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        div {
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
 <h1>Credit Score Monitoring</h1>
@@ -12,7 +65,7 @@
 <div th:unless="${creditScore != null}">
     <p>No credit score available</p>
 </div>
-<form action="#" th:action="@{/creditScore}" th:object="${creditScore}" method="post">
+<form action="#" th:action="@{/creditscore}" th:object="${creditScore}" method="get">
     <div>
         <label for="paymentHistory">Payment History (35%):</label>
         <input type="number" id="paymentHistory" name="paymentHistory" required>

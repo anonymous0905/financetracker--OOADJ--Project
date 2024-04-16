@@ -3,6 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <title>Bill Reminders</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        h1 {
+            color: #5a5a5a;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-right: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+            margin-right: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 <h1>Bill Reminders</h1>
@@ -25,7 +98,6 @@
         <td th:text="${reminder.amount}"></td>
         <td th:text="${reminder.paid} ? 'Yes' : 'No'"></td>
         <td>
-<!--            <a th:href="@{/billreminders/edit/{id}(id=${reminder.id})}">Edit</a>-->
             <a th:href="@{/billreminders/delete/{id}(id=${reminder.id})}">Delete</a>
             <a th:href="@{/billreminders/markPaid/{id}(id=${reminder.id})}">Mark as Paid</a>
         </td>

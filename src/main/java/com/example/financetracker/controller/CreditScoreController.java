@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
-@RequestMapping("/creditScore")
+@RequestMapping("/creditscore")
 public class CreditScoreController {
 
     private final CreditScoreService creditScoreService;

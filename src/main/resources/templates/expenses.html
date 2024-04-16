@@ -2,6 +2,88 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Expense Receipt Management</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 20px;
+      background-color: #f0f0f0;
+      color: #333;
+    }
+
+    h1, h2 {
+      color: #333;
+    }
+
+    form {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box; /* Added to ensure padding doesn't affect width */
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    div {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
 <h1>Expense Receipt Management</h1>
@@ -20,9 +102,9 @@
 <div>
   <h2>Expense List</h2>
   <ul th:each="expense : ${expenses}">
-    <li th:text="'Category: ' + ${expense.category} + ', Amount: ' + ${expense.amount} + ', Date: ' + ${expense.date}">
-      <img th:if="${expense.receiptImage}" th:src="@{'/uploaded-images/' + ${expense.receiptImage}}" alt="Receipt Image" style="width: 100px; height: auto;">
-    </li>
+    <a th:href="@{'/expenses/image/' + ${expense.receiptImage}}">
+      <li th:text="'Category: ' + ${expense.category} + ', Amount: ' + ${expense.amount} + ', Date: ' + ${expense.date}"></li>
+    </a>
   </ul>
 </div>
 </body>
