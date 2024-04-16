@@ -5,7 +5,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 @Document(collection = "incomes")
 public class Income {
     @Id
@@ -15,13 +14,39 @@ public class Income {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
-    public Income() {
+    private Income() {}
+
+    public static Builder builder() {
+        return new Builder();
     }
 
-    public Income(String source, double amount, Date date) {
-        this.source = source;
-        this.amount = amount;
-        this.date = date;
+    public static class Builder {
+        private String source;
+        private double amount;
+        private Date date;
+
+        public Builder source(String source) {
+            this.source = source;
+            return this;
+        }
+
+        public Builder amount(double amount) {
+            this.amount = amount;
+            return this;
+        }
+
+        public Builder date(Date date) {
+            this.date = date;
+            return this;
+        }
+
+        public Income build() {
+            Income income = new Income();
+            income.source = this.source;
+            income.amount = this.amount;
+            income.date = this.date;
+            return income;
+        }
     }
 
     public String getId() {
