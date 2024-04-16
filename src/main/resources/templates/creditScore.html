@@ -12,7 +12,7 @@
 <div th:unless="${creditScore != null}">
     <p>No credit score available</p>
 </div>
-<form action="#" th:action="@{/submitCreditScore}" th:object="${creditScore}" method="post">
+<form action="#" th:action="@{/creditScore}" th:object="${creditScore}" method="post">
     <div>
         <label for="paymentHistory">Payment History (35%):</label>
         <input type="number" id="paymentHistory" name="paymentHistory" required>

@@ -18,20 +18,21 @@ public class CreditScoreService {
     public CreditScore getCreditScore(String userId) {
         CreditScore creditScore = creditScoreRepository.findByUserId(userId);
         if (creditScore == null) {
-            // If credit score does not exist for the user, calculate and save a new one
-            creditScore = calculateCreditScore(); // Calculate the credit score
+            // If credit score does not exist for the user, create a new one with default values
+            creditScore = new CreditScore();
             creditScore.setUserId(userId);
+            creditScore.setScore(0); // Default score
             creditScoreRepository.save(creditScore);
         }
         return creditScore;
     }
 
-    private CreditScore calculateCreditScore() {
-        // Let's assume some random values for each factor
-        double paymentHistory = 0; // Payment history percentage
-        double amountsOwed = 0; // Amounts owed
-        int lengthOfCreditHistory = 0; // Length of credit history in years
-        int newCredit = 0; // Number of new credit accounts
+    public void updateCreditScore(CreditScore creditScore) {
+        // Calculate the credit score based on the provided CreditScore object
+        double paymentHistory = creditScore.getPaymentHistory();
+        double amountsOwed = creditScore.getAmountOwed();
+        int lengthOfCreditHistory = creditScore.getCreditHistoryLength();
+        int newCredit = creditScore.getNewCredit();
         // Credit mix score is assumed to be 10 (good mix)
 
         // Calculate the credit score based on the factors and weights
@@ -44,10 +45,10 @@ public class CreditScoreService {
         // Scale the score to fit within the range of 300 to 850
         score = ((score / 100) * (850 - 300)) + 300;
 
-        // Create a new CreditScore object
-        CreditScore creditScore = new CreditScore();
-        creditScore.setScore((int) Math.round(score)); // Set the calculated credit score
+        // Update the credit score in the provided CreditScore object
+        creditScore.setScore((int) Math.round(score));
 
-        return creditScore;
+        // Save the updated credit score into the database
+        creditScoreRepository.save(creditScore);
     }
 }
