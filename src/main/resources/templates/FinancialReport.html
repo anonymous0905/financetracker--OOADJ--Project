@@ -2,17 +2,33 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Credit Score Monitoring</title>
+    <title>Financial Reports</title>
 </head>
 <body>
-<h1>Credit Score Monitoring</h1>
+<h1>Financial Reports</h1>
 <div>
-    <h2>Credit Score Details</h2>
-    <div th:if="${creditScore != null}">
-        <p>Your credit score is: <span th:text="${creditScore.score}"></span></p>
+    <h2>Financial Report Details</h2>
+    <div th:if="${report != null}">
+        <p>Total Expenses: <span th:text="${report.totalExpenses}"></span></p>
+        <p>Total Income: <span th:text="${report.totalIncome}"></span></p>
+        <p>Net Income: <span th:text="${report.netIncome}"></span></p>
+        <div th:if="${report.billsRemaining}">
+            <p>Bills are remaining</p>
+        </div>
+        <div th:unless="${report.billsRemaining}">
+            <p>No bills are remaining</p>
+        </div>
+        <div th:if="${report.financialGoalsPresent}">
+            <p>Total Target Amount: <span th:text="${report.totalTargetAmount}"></span></p>
+            <p>Total Achieved Amount: <span th:text="${report.totalAchievedAmount}"></span></p>
+            <p>Goal Completion Percentage: <span th:text="${report.goalCompletionPercentage}"></span>%</p>
+        </div>
+        <div th:unless="${report.financialGoalsPresent}">
+            <p>No financial goals are present</p>
+        </div>
     </div>
-    <div th:unless="${creditScore != null}">
-        <p>No credit score available</p>
+    <div th:unless="${report != null}">
+        <p>No financial report available</p>
     </div>
 </div>
 </body>

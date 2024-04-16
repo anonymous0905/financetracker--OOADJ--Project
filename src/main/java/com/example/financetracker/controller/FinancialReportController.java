@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/financialReports")
 public class FinancialReportController {
@@ -23,8 +21,8 @@ public class FinancialReportController {
 
     @GetMapping
     public String showFinancialReports(Model model) {
-        List<FinancialReport> reports = financialReportService.getAllFinancialReports();
-        model.addAttribute("reports", reports);
+        FinancialReport report = financialReportService.generateFinancialReport();
+        model.addAttribute("report", report);
         return "FinancialReport";
     }
 }
