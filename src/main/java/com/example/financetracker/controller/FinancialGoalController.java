@@ -1,7 +1,7 @@
 package com.example.financetracker.controller;
 
 import com.example.financetracker.model.FinancialGoal;
-import com.example.financetracker.service.FinancialGoalService;
+import com.example.financetracker.facade.FinancialGoalFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,26 +12,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/financial_goal")
 public class FinancialGoalController {
-    private final FinancialGoalService financialGoalService;
+    private final FinancialGoalFacade financialGoalFacade;
 
     @Autowired
-    public FinancialGoalController(FinancialGoalService financialGoalService) {
-        this.financialGoalService = financialGoalService;
+    public FinancialGoalController(FinancialGoalFacade financialGoalFacade) {
+        this.financialGoalFacade = financialGoalFacade;
     }
 
     @GetMapping
     public String showFinancialGoalPage(Model model) {
-        model.addAttribute("financialGoal", new FinancialGoal()); // Add an empty FinancialGoal object to the model
-        model.addAttribute("financialGoals", financialGoalService.findAllFinancialGoals());
+        model.addAttribute("financialGoal", new FinancialGoal());
+        model.addAttribute("financialGoals", financialGoalFacade.findAllFinancialGoals());
         return "financial_goal";
     }
 
     @PostMapping("/add")
     public String addFinancialGoal(FinancialGoal financialGoal, Model model) {
-        financialGoalService.addFinancialGoal(financialGoal);
-        // Add an empty FinancialGoal object to the model for the form
+        financialGoalFacade.addFinancialGoal(financialGoal);
         model.addAttribute("financialGoal", new FinancialGoal());
-        model.addAttribute("financialGoals", financialGoalService.findAllFinancialGoals());
+        model.addAttribute("financialGoals", financialGoalFacade.findAllFinancialGoals());
         return "redirect:/financial_goal";
     }
 }

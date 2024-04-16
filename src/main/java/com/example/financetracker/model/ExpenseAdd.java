@@ -2,9 +2,9 @@ package com.example.financetracker.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
 
 @Document(collection = "expenses")
 public class ExpenseAdd {
@@ -15,13 +15,39 @@ public class ExpenseAdd {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
-    public ExpenseAdd() {
+    private ExpenseAdd() {}
+
+    public static Builder builder() {
+        return new Builder();
     }
 
-    public ExpenseAdd(String category, double amount, Date date) {
-        this.category = category;
-        this.amount = amount;
-        this.date = date;
+    public static class Builder {
+        private String category;
+        private double amount;
+        private Date date;
+
+        public Builder category(String category) {
+            this.category = category;
+            return this;
+        }
+
+        public Builder amount(double amount) {
+            this.amount = amount;
+            return this;
+        }
+
+        public Builder date(Date date) {
+            this.date = date;
+            return this;
+        }
+
+        public ExpenseAdd build() {
+            ExpenseAdd expenseAdd = new ExpenseAdd();
+            expenseAdd.category = this.category;
+            expenseAdd.amount = this.amount;
+            expenseAdd.date = this.date;
+            return expenseAdd;
+        }
     }
 
     public String getId() {
