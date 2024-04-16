@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Credit Score Monitoring</title>
+</head>
+<body>
+<h1>Credit Score Monitoring</h1>
+<div>
+    <h2>Credit Score Details</h2>
+    <div th:if="${creditScore != null}">
+        <p>Your credit score is: <span th:text="${creditScore.score}"></span></p>
+    </div>
+    <div th:unless="${creditScore != null}">
+        <p>No credit score available</p>
+    </div>
+</div>
+</body>
+</html>
