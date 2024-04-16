@@ -1,35 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Bill Reminders</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .button {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-<h1>Bill Reminders</h1>
-<form action="/add" method="post">
-    <label for="title">Title:</label>
-    <input type="text" id="title" name="title">
-    <label for="amount">Amount:</label>
-    <input type="number" id="amount" name="amount" step="0.01"><br>
-    <button type="submit">Add Reminder</button>
-</form>
-<table>
-    <tr>
-        <th>Title</th>
-        <th>Amount</th>
-        <th>Paid</th>
-        <th>Actions</th>
-    </tr>
-    <tr th:each="reminder : ${reminders}">
-        <td th:text="${reminder.title}"></td>
-        <td th:text="${reminder.amount}"></td>
-        <td th:text="${reminder.paid} ? 'Yes' : 'No'"></td>
-        <td>
-            <a th:href="@{/edit/{id}(id=${reminder.id})}">Edit</a>
-            <a th:href="@{/delete/{id}(id=${reminder.id})}">Delete</a>
-            <a th:href="@{/markPaid/{id}(id=${reminder.id})}">Mark as Paid</a>
-        </td>
-    </tr>
-</table>
+<h1>Welcome to Your Personal Finance Tracker</h1>
+<a href="billreminders" class="button">Bill Reminders</a>
+<a href="budget" class="button">Budget Management</a>
+<a href="creditscore" class="button">Credit Score Monitoring</a>
+<a href="expenseadd" class="button">Add Expense</a>
+<a href="expenses" class="button">View Expenses</a>
+<a href="financial_goal" class="button">Financial Goals</a>
+<a href="financialReports" class="button">Financial Reports</a>
+<a href="income" class="button">Income Tracking</a>
 </body>
 </html>

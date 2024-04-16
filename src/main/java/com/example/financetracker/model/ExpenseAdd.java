@@ -6,7 +6,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
-@Document(collection = "expenseadd")
+@Document(collection = "expenses")
 public class ExpenseAdd {
     @Id
     private String id;

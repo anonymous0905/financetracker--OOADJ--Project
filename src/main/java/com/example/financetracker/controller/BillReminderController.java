@@ -16,40 +16,44 @@ public class BillReminderController {
     private BillReminderService billReminderService;
 
     @GetMapping("/")
+    public String ind(){
+        return "index";
+    }
+    @GetMapping("/billreminders")
     public String index(Model model) {
         List<BillReminder> reminders = billReminderService.getAllReminders();
         model.addAttribute("reminders", reminders);
-        return "index";
+        return "billreminders";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/billreminders/add")
     public String addBillReminder(@ModelAttribute("billReminder") BillReminder reminder) {
         billReminderService.addReminder(reminder);
-        return "redirect:/";
+        return "redirect:/billreminders";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/billreminders/edit/{id}")
     public String showEditForm(@PathVariable("id") String id, Model model) {
         Optional<BillReminder> reminder = billReminderService.getReminderById(id);
         if (reminder.isPresent()) {
             model.addAttribute("reminder", reminder.get());
             return "edit";
         } else {
-            return "redirect:/";
+            return "redirect:/billreminders";
         }
     }
 
     
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/billreminders/delete/{id}")
     public String deleteReminder(@PathVariable("id") String id) {
         billReminderService.deleteReminder(id);
-        return "redirect:/";
+        return "redirect:/billreminders";
     }
 
-    @GetMapping("/markPaid/{id}")
+    @GetMapping("/billreminders/markPaid/{id}")
     public String markAsPaid(@PathVariable("id") String id) {
         billReminderService.markAsPaid(id);
-        return "redirect:/";
+        return "redirect:/billreminders";
     }
 }
