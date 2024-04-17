@@ -47,7 +47,7 @@ public class FinancialReportService {
         double totalIncome = calculateTotalIncome(incomes);
         double netIncome = totalIncome - totalExpenses;
         boolean areBillsRemaining = checkRemainingBills(billReminders);
-        boolean areFinancialGoalsPresent = !financialGoals.isEmpty(); // Check if any financial goals are present
+        boolean areFinancialGoalsPresent = !financialGoals.isEmpty();
 
         FinancialReport report = new FinancialReport();
         report.setTitle("Financial Summary");
@@ -56,13 +56,20 @@ public class FinancialReportService {
         report.setTotalIncome(totalIncome);
         report.setNetIncome(netIncome);
         report.setBillsRemaining(areBillsRemaining);
-        report.setFinancialGoalsPresent(areFinancialGoalsPresent); // Set whether financial goals are present
+        report.setFinancialGoalsPresent(areFinancialGoalsPresent);
 
         if (areFinancialGoalsPresent) {
             double totalTargetAmount = calculateTotalTargetAmount(financialGoals);
             double totalAchievedAmount = calculateTotalAchievedAmount(financialGoals, netIncome);
             report.setTotalTargetAmount(totalTargetAmount);
             report.setTotalAchievedAmount(totalAchievedAmount);
+
+            // Calculate and set goal completion percentage
+            double goalCompletionPercentage = (totalAchievedAmount / totalTargetAmount) * 100;
+            report.setGoalCompletionPercentage(goalCompletionPercentage);
+        } else {
+            // If no financial goals are present, set completion to 0%
+            report.setGoalCompletionPercentage(0);
         }
 
         // Save or manipulate FinancialReport entity
@@ -70,6 +77,7 @@ public class FinancialReportService {
 
         return report;
     }
+
 
     private double calculateTotalExpenses(List<Expense> expenses) {
         return expenses.stream()
